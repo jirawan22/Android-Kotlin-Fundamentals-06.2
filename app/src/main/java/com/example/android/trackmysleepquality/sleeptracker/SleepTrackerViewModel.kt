@@ -87,5 +87,18 @@ class SleepTrackerViewModel(
             database.update(night)
         }
     }
+    fun onClear(){
+        uiScope.launch {
+            deleteAllNight()
+            tonight.value = null
+        }
+    }
+
+    private suspend fun deleteAllNight() {
+        withContext(Dispatchers.IO){
+            database.clear()
+        }
+    }
+
 }
 
